@@ -1,6 +1,7 @@
 import tornado.ioloop
 from tornado.httpclient import AsyncHTTPClient
 import bs4
+import tornado.web
 
 
 def handle_request(response):
@@ -9,7 +10,7 @@ def handle_request(response):
     else:
         for ele in [x.getText() for x in parse_response(response.body)]:
             print(ele)
-    tornado.ioloop.IOLoop.instance().stop()
+
 
 
 def parse_response(body, selector=''):
@@ -24,6 +25,7 @@ def parse_response(body, selector=''):
 
 http_client = AsyncHTTPClient()
 http_client.fetch('https://automatetheboringstuff.com/chapter11/', callback=handle_request)
+
 
 
 print('next')
